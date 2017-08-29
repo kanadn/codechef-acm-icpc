@@ -1,37 +1,63 @@
-## Welcome to GitHub Pages
+#include<iostream>
+using namespace std;
 
-You can use the [editor on GitHub](https://github.com/nitishprajapati/foobar/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+bool IsNice(int [][], int);
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+int main()
+{
+    int order, i, j;
 
-### Markdown
+    cout<<"\nEnter the order of the matrix: ";
+    cin>>order;
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+    int Matrix[order][order];
 
-```markdown
-Syntax highlighted code block
+    for(i=0; i< order; i++)
+    {
+        for(j=0; j < order; j++)
+        {
+            cin>>Matrix[i][j];
+        }
+    }
 
-# Header 1
-## Header 2
-### Header 3
+    IsNice(Matrix, order);
+}
 
-- Bulleted
-- List
+bool IsNice(int Matrix[][order], int order)
+{
+    int RowMin[order], ColumnMax[order], R_Max, C_Min, Var, i, j;
 
-1. Numbered
-2. List
+    for(i=0; i < order; i++)
+    {
+        Var = Matrix[i][0];
+        for(j=0; j < order; j++)
+        {
+            if(Matrix[i][j] < Var) Var = Matrix[i][j];
+        }
+        RowMin[i] = Var;
+    }
 
-**Bold** and _Italic_ and `Code` text
+    for(i=0; i < order; i++)
+    {
+        Var = 0;
+        for(j=0; j < order; j++)
+        {
+            if(Matrix[j][i] > Var) Var = Matrix[j][i];
+        }
+        ColumnMax[i] = Var;
+    }
 
-[Link](url) and ![Image](src)
-```
+    R_Max = RowMin[0];
+    for(i=0; i < order; i++)
+    {
+        if(RowMin[i] > R_Max) R_Max = RowMin[i];
+    }
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+    C_Min = ColumnMax[0
+    for(i=0; i < order; i++)
+    {
+        if(ColumnMin[i] < C_Min) C_Min = ColumnMax[i];
+    }
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/nitishprajapati/foobar/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    if(R_Max == C_Min) return true;
+}
