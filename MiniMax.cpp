@@ -1,8 +1,5 @@
 #include<iostream>
 using namespace std;
-
-bool IsNice(int [][], int);
-
 int main()
 {
     int order, i, j;
@@ -11,7 +8,7 @@ int main()
     cin>>order;
 
     int Matrix[order][order];
-
+    cout<<"\nenter elements of matrix one by one (row major) :- \n";
     for(i=0; i< order; i++)
     {
         for(j=0; j < order; j++)
@@ -20,12 +17,7 @@ int main()
         }
     }
 
-    IsNice(Matrix, order);
-}
-
-bool IsNice(int Matrix[][order], int order)
-{
-    int RowMin[order], ColumnMax[order], R_Max, C_Min, Var, i, j;
+    int RowMin[order], ColumnMax[order], R_Max, C_Min, Var;
 
     for(i=0; i < order; i++)
     {
@@ -53,11 +45,34 @@ bool IsNice(int Matrix[][order], int order)
         if(RowMin[i] > R_Max) R_Max = RowMin[i];
     }
 
-    C_Min = ColumnMax[0
+    C_Min = ColumnMax[0];
     for(i=0; i < order; i++)
     {
-        if(ColumnMin[i] < C_Min) C_Min = ColumnMax[i];
+        if(ColumnMax[i] < C_Min) C_Min = ColumnMax[i];
     }
 
-    if(R_Max == C_Min) return true;
+    if(R_Max == C_Min)
+    {
+        cout<<"\nmatrix is nice";
+        return 0;
+    }
+    int count,c[order];
+      for(i=0; i < order; i++)
+    {
+       count=0;
+        for(j=0; j < order; j++)
+        {
+            if(Matrix[j][i] > R_Max) count++;
+        }
+        c[i]=count;
+    }
+   int min=c[0];
+     for(i=0; i < order; i++)
+    {
+        if(c[i]<min)
+            min=c[i];
+    }
+    cout<<"\nnumber of changes required= "<<min;
+    return 0;
 }
+
